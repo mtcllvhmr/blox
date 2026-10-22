@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#F4F1EA">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Ruta">
+  <title>Ruta</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header>
+      <span class="brand">ruta</span>
+      <span class="best">best <b id="best">0</b></span>
+    </header>
+
+    <div class="scoreline">
+      <div id="score">0</div>
+      <div id="note"></div>
+    </div>
+
+    <div id="boardwrap">
+      <div id="board"></div>
+      <div id="fx"></div>
+      <div id="over" hidden>
+        <p class="over-title">No more room</p>
+        <p id="final">0</p>
+        <p id="overbest"></p>
+        <button id="again" type="button">Play again</button>
+      </div>
+    </div>
+
+    <div id="tray">
+      <div class="slot" data-i="0"></div>
+      <div class="slot" data-i="1"></div>
+      <div class="slot" data-i="2"></div>
+    </div>
+
+    <button id="restart" type="button">new game</button>
+  </main>
+
+  <div id="rotate">Turn your phone upright</div>
+
+  <script src="game.js"></script>
+</body>
+</html>
