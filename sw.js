@@ -2,7 +2,7 @@
 // Strategy: always try the internet first so updates show up straight away; if
 // there's no connection (or it takes over 3 seconds), use the saved copy instead.
 // Bump VERSION whenever you change any file.
-const VERSION = 'blox-v4';
+const VERSION = 'blox-v5';
 const FILES = [
   './',
   './index.html',

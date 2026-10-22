@@ -54,7 +54,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(env(safe-area-inset-top) + 28px) 16px calc(env(safe-area-inset-bottom) + 10px);
+  padding: calc(env(safe-area-inset-top) + 28px) 10px calc(env(safe-area-inset-bottom) + 10px);
 }
 
 header {

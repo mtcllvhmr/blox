@@ -188,12 +188,16 @@ let cells = [];
 let size = { cell: 40, gap: 5, pad: 8 };
 
 function layout() {
-  const w = Math.min(innerWidth - 32, 480);
-  let cell = Math.floor(Math.min((w - 16) / (N + 0.85), (innerHeight - 280) / (N + 3.6)));
-  cell = Math.max(cell, 22);
-  const gap = Math.max(3, Math.round(cell * 0.12));
-  const pad = Math.round(gap * 1.6);
-  const bw = cell * N + gap * (N - 1) + pad * 2;
+  // Board fills the screen width, leaving a 10px margin each side
+  const w = Math.min(innerWidth - 20, 500);
+  const spacing = c => {
+    const gap = Math.max(3, Math.round(c * 0.11));
+    const pad = Math.round(gap * 1.6);
+    return { gap, pad, bw: c * N + gap * (N - 1) + pad * 2 };
+  };
+  let cell = Math.floor(Math.min(w / N, (innerHeight - 280) / (N + 3.6)));
+  while (cell > 22 && spacing(cell).bw > w) cell--;
+  const { gap, pad, bw } = spacing(cell);
   const mgap = Math.max(2, Math.round(gap * 0.6));
   // Tray pieces are half size, but a 5-long bar must still fit in a third of the width
   const mini = Math.min(Math.round(cell * 0.5), Math.floor((bw / 3 - 12 - mgap * 4) / 5));
@@ -342,8 +346,8 @@ function renderAll() {
 }
 
 // ---------- Dragging ----------
-// The piece travels this much further than your finger (1.2 = 20% faster)
-const DRAG_SPEED = 1.2;
+// The piece travels this much further than your finger (1.4 = 40% faster)
+const DRAG_SPEED = 1.4;
 let drag = null;
 
 trayEl.addEventListener('pointerdown', e => {
