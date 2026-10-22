@@ -1,4 +1,4 @@
-# Ruta
+# Blox
 
 A quiet 8×8 block puzzle for iPhone. Runs offline from the home screen. No accounts, no tracking, and everything is saved on the phone.
 
@@ -26,10 +26,10 @@ A quiet 8×8 block puzzle for iPhone. Runs offline from the home screen. No acco
 ## Put it online (GitHub Pages, free)
 
 1. Create a free account at github.com if you don't have one.
-2. Click **+ → New repository**. Name it `ruta`, set it to **Public**, and click **Create repository**.
+2. Click **+ → New repository**. Name it `blox`, set it to **Public**, and click **Create repository**.
 3. On the new repository page, click **uploading an existing file**. Drag in all the files and the `icons` folder, then click **Commit changes**.
 4. Go to **Settings → Pages**. Under *Build and deployment*, set Source to **Deploy from a branch**, Branch to **main** and folder to **/ (root)**, then click **Save**.
-5. Wait a minute or two. The address will be `https://<your-username>.github.io/ruta/`.
+5. Wait a minute or two. The address will be `https://<your-username>.github.io/blox/`. (Live now at https://mtcllvhmr.github.io/blox/)
 
 ## Add it to your iPhone home screen
 
@@ -37,14 +37,14 @@ A quiet 8×8 block puzzle for iPhone. Runs offline from the home screen. No acco
 2. Wait for the game to appear, and play a move so you know it has loaded fully.
 3. Tap the **Share** button (square with an arrow) and choose **Add to Home Screen**. If you don't see it, scroll down the share sheet.
 4. Make sure **Open as Web App** is on (if shown), then tap **Add**.
-5. Open Ruta from the home screen. It runs full-screen with no browser bars.
+5. Open Blox from the home screen. It runs full-screen with no browser bars.
 6. To check offline play, switch on Airplane Mode and open it again.
 
 Note: the home-screen app keeps its own storage, separate from Safari. The best score you set in Safari won't carry over. That's normal.
 
 ## Changing it later
 
-Edit the files and upload them to GitHub again. The phone shows the cached version first and fetches the new one in the background. Close and reopen the app once more to see your change. For a guaranteed clean refresh, change `VERSION` in `sw.js` (e.g. `ruta-v2`).
+Edit the files and upload them to GitHub again. The phone shows the cached version first and fetches the new one in the background. Close and reopen the app once more to see your change. For a guaranteed clean refresh, change `VERSION` in `sw.js` (e.g. `blox-v2`).
 
 ## Ideas for later
 

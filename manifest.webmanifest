@@ -1,6 +1,6 @@
 {
-  "name": "Ruta",
-  "short_name": "Ruta",
+  "name": "Blox",
+  "short_name": "Blox",
   "description": "A quiet block puzzle.",
   "start_url": "./",
   "scope": "./",

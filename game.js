@@ -30,8 +30,8 @@ const TOTAL_WEIGHT = SHAPES.reduce((sum, s) => sum + s.weight, 0);
 
 const N = 8;            // board is N × N
 const COLORS = 5;
-const SAVE_KEY = 'ruta.game';
-const BEST_KEY = 'ruta.best';
+const SAVE_KEY = 'blox.game';
+const BEST_KEY = 'blox.best';
 
 // ---------- Game state ----------
 // grid: 64 numbers, 0 = empty, 1–5 = block colour
