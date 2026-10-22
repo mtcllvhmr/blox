@@ -44,7 +44,7 @@ Note: the home-screen app keeps its own storage, separate from Safari. The best 
 
 ## Changing it later
 
-Edit the files and upload them to GitHub again. The phone shows the cached version first and fetches the new one in the background. Close and reopen the app once more to see your change. For a guaranteed clean refresh, change `VERSION` in `sw.js` (e.g. `blox-v2`).
+Edit the files and upload them to GitHub again. Also change `VERSION` in `sw.js` (e.g. `blox-v5`). When online, the app always loads the newest files and reloads itself if an update lands while it is open. Offline, it uses the saved copy.
 
 ## Ideas for later
 

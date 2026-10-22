@@ -1,7 +1,8 @@
 // Service worker: keeps a copy of every file on the phone so the game runs offline.
-// Strategy: answer from the cache straight away, then quietly fetch a fresh copy
-// for next time (when online). Bump VERSION to force a clean re-download.
-const VERSION = 'blox-v3';
+// Strategy: always try the internet first so updates show up straight away; if
+// there's no connection (or it takes over 3 seconds), use the saved copy instead.
+// Bump VERSION whenever you change any file.
+const VERSION = 'blox-v4';
 const FILES = [
   './',
   './index.html',
@@ -12,9 +13,13 @@ const FILES = [
   './icons/icon-192.png',
   './icons/icon-512.png',
 ];
+const TIMEOUT_MS = 3000;
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(VERSION).then(cache => cache.addAll(FILES)));
+  // cache: 'reload' skips the browser's own short-term cache so we save the newest files
+  event.waitUntil(
+    caches.open(VERSION).then(cache => cache.addAll(FILES.map(f => new Request(f, { cache: 'reload' }))))
+  );
   self.skipWaiting();
 });
 
@@ -27,17 +32,23 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.open(VERSION).then(async cache => {
-      const cached = await cache.match(event.request, { ignoreSearch: true });
-      const fresh = fetch(event.request)
-        .then(res => {
-          if (res.ok) cache.put(event.request, res.clone());
-          return res;
-        })
-        .catch(() => cached);
-      return cached || fresh;
-    })
-  );
+  const req = event.request;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  event.respondWith(fromNetwork(req).catch(() => fromCache(req)));
 });
+
+async function fromNetwork(req) {
+  const res = await Promise.race([
+    fetch(req.url, { cache: 'no-cache' }),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), TIMEOUT_MS)),
+  ]);
+  if (!res.ok) throw new Error('bad response');
+  const cache = await caches.open(VERSION);
+  cache.put(req, res.clone());
+  return res;
+}
+
+async function fromCache(req) {
+  const cached = await caches.match(req, { ignoreSearch: true });
+  return cached || Response.error();
+}
