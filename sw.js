@@ -1,7 +1,7 @@
 // Service worker: keeps a copy of every file on the phone so the game runs offline.
 // Strategy: answer from the cache straight away, then quietly fetch a fresh copy
 // for next time (when online). Bump VERSION to force a clean re-download.
-const VERSION = 'blox-v2';
+const VERSION = 'blox-v3';
 const FILES = [
   './',
   './index.html',

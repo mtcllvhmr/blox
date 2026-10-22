@@ -1,6 +1,6 @@
 # Blox
 
-A quiet 8×8 block puzzle for iPhone. Runs offline from the home screen. No accounts, no tracking, and everything is saved on the phone.
+A quiet 7×7 block puzzle for iPhone. Runs offline from the home screen. No accounts, no tracking, and everything is saved on the phone.
 
 ## What each file does
 

@@ -28,10 +28,10 @@ const SHAPES = SHAPE_DEFS.map(([weight, art]) => {
 });
 const TOTAL_WEIGHT = SHAPES.reduce((sum, s) => sum + s.weight, 0);
 
-const N = 8;            // board is N × N
+const N = 7;            // board is N × N
 const COLORS = 5;
 const SAVE_KEY = 'blox.game';
-const BEST_KEY = 'blox.best';
+const BEST_KEY = 'blox.best.7x7'; // separate best for the 7×7 board
 
 // ---------- Game state ----------
 // grid: 64 numbers, 0 = empty, 1–5 = block colour
@@ -189,19 +189,23 @@ let size = { cell: 40, gap: 5, pad: 8 };
 
 function layout() {
   const w = Math.min(innerWidth - 32, 480);
-  let cell = Math.floor(Math.min((w - 16) / 8.85, (innerHeight - 280) / 11.6));
+  let cell = Math.floor(Math.min((w - 16) / (N + 0.85), (innerHeight - 280) / (N + 3.6)));
   cell = Math.max(cell, 22);
   const gap = Math.max(3, Math.round(cell * 0.12));
   const pad = Math.round(gap * 1.6);
-  const mini = Math.round(cell * 0.5);
+  const bw = cell * N + gap * (N - 1) + pad * 2;
+  const mgap = Math.max(2, Math.round(gap * 0.6));
+  // Tray pieces are half size, but a 5-long bar must still fit in a third of the width
+  const mini = Math.min(Math.round(cell * 0.5), Math.floor((bw / 3 - 12 - mgap * 4) / 5));
   size = { cell, gap, pad };
   const root = document.documentElement.style;
+  root.setProperty('--n', N);
   root.setProperty('--cell', cell + 'px');
   root.setProperty('--gap', gap + 'px');
   root.setProperty('--pad', pad + 'px');
   root.setProperty('--mini', mini + 'px');
-  root.setProperty('--mgap', Math.max(2, Math.round(gap * 0.6)) + 'px');
-  root.setProperty('--bw', (cell * N + gap * (N - 1) + pad * 2) + 'px');
+  root.setProperty('--mgap', mgap + 'px');
+  root.setProperty('--bw', bw + 'px');
 }
 
 function buildBoard() {

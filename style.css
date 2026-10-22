@@ -92,7 +92,7 @@ header {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(8, var(--cell));
+  grid-template-columns: repeat(var(--n), var(--cell));
   gap: var(--gap);
   padding: var(--pad);
   background: var(--board);
