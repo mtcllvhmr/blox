@@ -338,6 +338,8 @@ function renderAll() {
 }
 
 // ---------- Dragging ----------
+// The piece travels this much further than your finger (1.2 = 20% faster)
+const DRAG_SPEED = 1.2;
 let drag = null;
 
 trayEl.addEventListener('pointerdown', e => {
@@ -356,6 +358,7 @@ trayEl.addEventListener('pointerdown', e => {
 
   drag = {
     id: e.pointerId, i, piece, shape, el, slot, r: null, c: null,
+    x0: e.clientX, y0: e.clientY,
     w: shape.w * size.cell + (shape.w - 1) * size.gap,
     h: shape.h * size.cell + (shape.h - 1) * size.gap,
   };
@@ -365,9 +368,12 @@ trayEl.addEventListener('pointerdown', e => {
 
 function moveDrag(x, y) {
   const d = drag;
-  // The piece floats above your finger so you can see where it's going
-  const left = x - d.w / 2;
-  const top = y - d.h - size.cell * 1.1;
+  // The piece floats above your finger so you can see where it's going,
+  // and moves DRAG_SPEED times as far as your finger does
+  const px = d.x0 + (x - d.x0) * DRAG_SPEED;
+  const py = d.y0 + (y - d.y0) * DRAG_SPEED;
+  const left = px - d.w / 2;
+  const top = py - d.h - size.cell * 1.1;
   d.el.style.transform = `translate3d(${left}px,${top}px,0)`;
 
   const b = boardEl.getBoundingClientRect();
